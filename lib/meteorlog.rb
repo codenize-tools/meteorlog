@@ -1,4 +1,4 @@
-require "meteorlog/version"
+require 'meteorlog/version'
 
 module Meteorlog
   # Your code goes here...
