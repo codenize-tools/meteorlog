@@ -18,11 +18,16 @@ class Meteorlog::DSL::Context::MetricFilter
     @result.filter_pattern = filter_pattern.to_s
   end
 
-  def metric(metric_attrs)
-    _expected_type(metric_attrs, Hash)
-    [:metric_name, :metric_namespace, :metric_value].each do |name|
-      _required("metric[#{name}]", metric_attrs[name])
-      metric_attrs[name] = metric_attrs[name].to_s
+  def metric(attrs)
+    metric_attrs = {}
+    _expected_type(attrs, Hash)
+    {
+      :name => :metric_name,
+      :namespace => :metric_namespace,
+      :value => :metric_value
+    }.each do |attr_name, metric_name|
+      _required("metric[#{attr_name}]", attrs[attr_name])
+      metric_attrs[metric_name] = attrs[attr_name].to_s
     end
     _expected_length(metric_attrs, 3)
 

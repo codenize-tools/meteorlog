@@ -63,9 +63,9 @@ end
 
     metrics.map {|metric|
       metric_attrs = unbrace({
-        :metric_name => metric[:metric_name],
-        :metric_namespace => metric[:metric_namespace],
-        :metric_value => metric[:metric_value],
+        :name => metric[:metric_name],
+        :namespace => metric[:metric_namespace],
+        :value => metric[:metric_value],
       }.inspect)
 
       "metric #{metric_attrs}"

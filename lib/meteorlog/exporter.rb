@@ -43,13 +43,13 @@ class Meteorlog::Exporter
 
   def export_metric_filters(metric_filters)
     result = {}
-   
+
     metric_filters.each do |metric_filter|
       filter_name = metric_filter.filter_name
       metric_transformations = metric_filter.metric_transformations.map do |metric_transformation|
         {
-          :metric_name => metric_transformation.metric_name,
           :metric_namespace => metric_transformation.metric_namespace,
+          :metric_name => metric_transformation.metric_name,
           :metric_value => metric_transformation.metric_value,
         }
       end
