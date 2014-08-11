@@ -10,6 +10,6 @@ class Meteorlog::Wrapper::CloudWatchLogs
   end
 
   def modified?
-    @options[:modified]
+    !!@options[:modified]
   end
 end
