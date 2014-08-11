@@ -1,0 +1,2 @@
+module Meteorlog::Utils
+end
