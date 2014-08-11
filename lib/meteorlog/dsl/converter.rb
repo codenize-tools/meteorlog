@@ -27,7 +27,7 @@ class Meteorlog::DSL::Converter
     buf << output_metric_filters(metric_filters, :prefix => '  ') unless metric_filters.empty?
 
     <<-EOS
-log_group_name #{log_group_name} do
+log_group #{log_group_name} do
   #{buf.join("\n\n  ")}
 end
     EOS
