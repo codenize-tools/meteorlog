@@ -62,7 +62,8 @@ log_group "/var/log/messages" do
   end
 
   metric_filter "MyAppAccessCount2" do
-    filter_pattern '[...]'
+    # see http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/FilterAndPatternSyntax.html
+    filter_pattern '[ip, user, username, timestamp, request, status_code, bytes > 1000]'
     metric :name=>"EventCount2", :namespace=>"YourNamespace2", :value=>"2"
   end
 end
@@ -71,10 +72,12 @@ log_group "/var/log/maillog" do
   log_stream "my-stream2"
 
   metric_filter "MyAppAccessCount" do
+    filter_pattern '[..., status_code, bytes]'
     metric :name=>"EventCount3", :namespace=>"YourNamespace", :value=>"1"
   end
 
   metric_filter "MyAppAccessCount2" do
+    filter_pattern '[ip, user, username, timestamp, request = *html*, status_code = 4*, bytes]'
     metric :name=>"EventCount4", :namespace=>"YourNamespace2", :value=>"2"
   end
 end
