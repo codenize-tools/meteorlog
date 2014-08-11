@@ -15,7 +15,7 @@ class Meteorlog::DSL::Context::MetricFilter
   def filter_pattern(pattern)
     _call_once(:filter_pattern)
     _required(:filter_pattern, pattern)
-    @result.filter_pattern = filter_pattern.to_s
+    @result.filter_pattern = pattern.to_s
   end
 
   def metric(attrs)

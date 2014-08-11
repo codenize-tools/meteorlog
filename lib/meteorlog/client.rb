@@ -47,7 +47,7 @@ class Meteorlog::Client
 
   def walk_log_group(dsl_log_group, aws_log_group)
     walk_log_streams(dsl_log_group.log_streams, aws_log_group.log_streams)
-    # XXX: walk_metric_filters
+    walk_metric_filters(dsl_log_group.metric_filters, aws_log_group.metric_filters)
   end
 
   def walk_log_streams(dsl_log_streams, aws_log_streams)
@@ -65,6 +65,28 @@ class Meteorlog::Client
 
     aws_log_streams.each do |log_stream_name, aws_log_stream|
       aws_log_stream.delete
+    end
+  end
+
+  def walk_metric_filters(dsl_metric_filters, aws_metric_filters)
+    collection_api = aws_metric_filters
+    dsl_metric_filters = collect_to_hash(dsl_metric_filters, :filter_name)
+    aws_metric_filters = collect_to_hash(aws_metric_filters, :filter_name)
+
+    dsl_metric_filters.each do |filter_name, dsl_metric_filter|
+      aws_metric_filter = aws_metric_filters.delete(filter_name)
+
+      if aws_metric_filter
+        unless aws_metric_filter.eql?(dsl_metric_filter)
+          aws_metric_filter.update(dsl_metric_filter)
+        end
+      else
+        collection_api.create(filter_name, dsl_metric_filter)
+      end
+    end
+
+    aws_metric_filters.each do |filter_name, aws_metric_filter|
+      aws_metric_filter.delete
     end
   end
 
