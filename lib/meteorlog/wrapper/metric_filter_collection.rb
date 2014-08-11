@@ -32,7 +32,7 @@ class Meteorlog::Wrapper::MetricFilterCollection
 
     metric_filter = OpenStruct.new(
       :filter_name => name,
-      :filter_pattern => opts[:filter_pattern]
+      :filter_pattern => opts[:filter_pattern],
       :metric_transformations => opts[:metric_transformations])
 
     Meteorlog::Wrapper::MetricFilter.new(metric_filter, @log_group, @options)

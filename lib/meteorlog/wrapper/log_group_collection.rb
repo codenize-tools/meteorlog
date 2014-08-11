@@ -22,7 +22,7 @@ class Meteorlog::Wrapper::LogGroupCollection
       @options[:modified] = true
     end
 
-    log_group = OpenStruct.new(params.merge(
+    log_group = OpenStruct.new(
       :log_group_name => name, :log_streams => [], :metric_filters => [])
 
     Meteorlog::Wrapper::LogGroup.new(

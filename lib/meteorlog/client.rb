@@ -46,8 +46,26 @@ class Meteorlog::Client
   end
 
   def walk_log_group(dsl_log_group, aws_log_group)
-    # XXX:
-    puts :update
+    walk_log_streams(dsl_log_group.log_streams, aws_log_group.log_streams)
+    # XXX: walk_metric_filters
+  end
+
+  def walk_log_streams(dsl_log_streams, aws_log_streams)
+    collection_api = aws_log_streams
+    dsl_log_streams = collect_to_hash(dsl_log_streams, :log_stream_name)
+    aws_log_streams = collect_to_hash(aws_log_streams, :log_stream_name)
+
+    dsl_log_streams.each do |log_stream_name, dsl_log_stream|
+      aws_log_stream = aws_log_streams.delete(log_stream_name)
+
+      unless aws_log_stream
+        collection_api.create(log_stream_name)
+      end
+    end
+
+    aws_log_streams.each do |log_stream_name, aws_log_stream|
+      aws_log_stream.delete
+    end
   end
 
   def load_file(file)

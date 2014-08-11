@@ -12,30 +12,28 @@ class Meteorlog::Wrapper::LogGroup
 
   def log_streams
     if @log_group.respond_to?(:log_streams)
-      @log_group.log_streams
+      lss = @log_group.log_streams
     else
-      @cloud_watch_logs.describe_log_streams(
+      lss = @cloud_watch_logs.describe_log_streams(
         :log_group_name => log_group_name
       ).each.inject([]) {|r, i| r + i.log_streams }
     end
+
+    Meteorlog::Wrapper::LogStreamCollection.new(
+      @cloud_watch_logs, lss, @log_group, @options)
   end
 
   def metric_filters
     if @log_group.respond_to?(:metric_filters)
-      @log_group.metric_filters
+      mfs = @log_group.metric_filters
     else
-      @cloud_watch_logs.describe_metric_filters(
+      mfs = @cloud_watch_logs.describe_metric_filters(
         :log_group_name => log_group_name
       ).each.inject([]) {|r, i| r + i.metric_filters }
     end
-  end
 
-  def eql?(dsl)
-    # XXX:
-  end
-
-  def update
-    # XXX:
+    Meteorlog::Wrapper::MetricFilterCollection.new(
+      @cloud_watch_logs, mfs, @log_group, @options)
   end
 
   def delete
