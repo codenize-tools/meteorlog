@@ -62,38 +62,17 @@ end
     prefix = opts[:prefix]
 
     metrics.map {|metric|
-      name = metric[:metric_name].inspect
-      metric_namespace = metric[:metric_namespace].inspect
-      metric_value = metric[:metric_value].inspect
+      metric_attrs = unbrace({
+        :metric_name => metric[:metric_name],
+        :metric_namespace => metric[:metric_namespace],
+        :metric_value => metric[:metric_value],
+      }.inspect)
 
-      [
-        "metric #{name} do",
-        "  metric_namespace #{metric_namespace}",
-        "  metric_value #{metric_value}",
-        "end",
-      ].join("\n#{prefix}")
+      "metric #{metric_attrs}"
     }.join("\n#{prefix}")
   end
-end
-__END__
-{"/var/log/messages"=>
-  {:log_streams=>["i-c8a53ed1"],
-   :metric_filters=>
-    {"MyAppAccessCount"=>
-      {:metric_transformations=>
-        [{:metric_name=>"EventCount",
-          :metric_namespace=>"YourNamespace",
-          :metric_value=>"1"}]}}}}
 
-log_group "/var/log/messages" do
-  stream "i-c8a53ed1"
-
-  filter "MyAppAccessCount" do
-    pattern "FilterPattern"
-
-    metric "EventCount" do
-      namespace "YourNamespace"
-      value "1"
-    end
+  def unbrace(str)
+    str.sub(/\A\s*\{/, '').sub(/\}\s*\z/, '')
   end
 end
