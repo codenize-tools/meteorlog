@@ -16,7 +16,7 @@ class Meteorlog::Wrapper::LogStreamCollection
   end
 
   def create(name, opts = {})
-    log(:info, 'Create LogStream', :cyan, name)
+    log(:info, 'Create LogStream', :cyan, "#{@log_group.log_group_name} > #{name}")
 
     unless @options[:dry_run]
       @cloud_watch_logs.create_log_stream(
