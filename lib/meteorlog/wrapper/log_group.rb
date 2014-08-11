@@ -11,12 +11,29 @@ class Meteorlog::Wrapper::LogGroup
   end
 
   def log_streams
-    @cloud_watch_logs.describe_log_streams(
-      :log_group_name => log_group_name).log_streams
+    if @log_group.respond_to?(:log_streams)
+      @log_group.log_streams
+    else
+      @cloud_watch_logs.describe_log_streams(
+        :log_group_name => log_group_name).log_streams
+    end
   end
 
   def metric_filters
-    @cloud_watch_logs.describe_metric_filters(
-      :log_group_name => log_group_name).metric_filters
+    if @log_group.respond_to?(:metric_filters)
+      @log_group.metric_filters
+    else
+      @cloud_watch_logs.describe_metric_filters(
+        :log_group_name => log_group_name).metric_filters
+    end
+  end
+
+  def delete
+    log(:info, 'Delete LogGroup', :red, self.log_group_name)
+
+    unless @options[:dry_run]
+      @cloud_watch_logs.delete_log_group(:log_group_name => self.log_group_name)
+      @options[:modified] = true
+    end
   end
 end

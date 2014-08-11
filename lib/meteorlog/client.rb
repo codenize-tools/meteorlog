@@ -28,9 +28,8 @@ class Meteorlog::Client
       aws_log_group = aws_log_groups[log_group_name]
 
       unless aws_log_group
-        # XXX:
-        puts :create
-        #aws_log_groups[:log_group_name] = aws_log_group
+        aws_log_group = aws.log_groups.create(log_group_name)
+        aws_log_groups[log_group_name] = aws_log_group
       end
     end
 
@@ -40,9 +39,7 @@ class Meteorlog::Client
     end
 
     aws_log_groups.each do |log_group_name, aws_log_group|
-      # XXX:
-      puts :delete
-      #aws_log_group.delete
+      aws_log_group.delete
     end
 
     aws.modified?
