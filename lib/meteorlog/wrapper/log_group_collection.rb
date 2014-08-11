@@ -9,7 +9,8 @@ class Meteorlog::Wrapper::LogGroupCollection
 
   def each
     @log_groups.each do |log_group|
-      yield(Meteorlog::Wrapper::LogGroup.new(@cloud_watch_logs, log_group, @options))
+      yield(Meteorlog::Wrapper::LogGroup.new(
+        @cloud_watch_logs, log_group, @options))
     end
   end
 
@@ -27,6 +28,7 @@ class Meteorlog::Wrapper::LogGroupCollection
       :metric_filters => []
     )
 
-    Meteorlog::Wrapper::LogGroup.new(log_group, @options)
+    Meteorlog::Wrapper::LogGroup.new(
+      @cloud_watch_logs, log_group, @options)
   end
 end

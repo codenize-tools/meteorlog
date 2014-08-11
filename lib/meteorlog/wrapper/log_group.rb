@@ -28,6 +28,14 @@ class Meteorlog::Wrapper::LogGroup
     end
   end
 
+  def eql?(dsl)
+    # XXX:
+  end
+
+  def update
+    # XXX:
+  end
+
   def delete
     log(:info, 'Delete LogGroup', :red, self.log_group_name)
 
