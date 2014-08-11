@@ -22,11 +22,8 @@ class Meteorlog::Wrapper::LogGroupCollection
       @options[:modified] = true
     end
 
-    log_group = OpenStruct.new(
-      :log_group_name => name,
-      :log_streams => [],
-      :metric_filters => []
-    )
+    log_group = OpenStruct.new(params.merge(
+      :log_group_name => name, :log_streams => [], :metric_filters => [])
 
     Meteorlog::Wrapper::LogGroup.new(
       @cloud_watch_logs, log_group, @options)

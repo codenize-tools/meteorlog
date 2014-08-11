@@ -15,7 +15,8 @@ class Meteorlog::Wrapper::LogGroup
       @log_group.log_streams
     else
       @cloud_watch_logs.describe_log_streams(
-        :log_group_name => log_group_name).each.inject([]) {|r, i| r + i.log_streams }
+        :log_group_name => log_group_name
+      ).each.inject([]) {|r, i| r + i.log_streams }
     end
   end
 
@@ -24,7 +25,8 @@ class Meteorlog::Wrapper::LogGroup
       @log_group.metric_filters
     else
       @cloud_watch_logs.describe_metric_filters(
-        :log_group_name => log_group_name).each.inject([]) {|r, i| r + i.metric_filters }
+        :log_group_name => log_group_name
+      ).each.inject([]) {|r, i| r + i.metric_filters }
     end
   end
 
