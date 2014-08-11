@@ -1,5 +1,6 @@
-require 'meteorlog/version'
+module Meteorlog; end
 
-module Meteorlog
-  # Your code goes here...
-end
+require 'aws-sdk-core'
+
+require 'meteorlog/version'
+require 'meteorlog/exporter'
