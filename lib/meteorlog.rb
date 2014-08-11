@@ -1,5 +1,6 @@
 module Meteorlog; end
 
+require 'forwardable'
 require 'json'
 require 'logger'
 require 'ostruct'
@@ -21,3 +22,6 @@ require 'meteorlog/exporter'
 require 'meteorlog/ext/string_ext'
 require 'meteorlog/version'
 require 'meteorlog/wrapper'
+require 'meteorlog/wrapper/cloud_watch_logs'
+require 'meteorlog/wrapper/log_group_collection'
+require 'meteorlog/wrapper/log_group'

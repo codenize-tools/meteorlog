@@ -20,6 +20,12 @@ class Meteorlog::Client
 
   def walk(file)
     dsl = load_file(file)
+    dsl_log_groups = collect_to_hash(dsl.log_groups, :log_group_name)
+    aws = Meteorlog::Wrapper.wrap(@cloud_watch_logs, @options)
+    aws_log_groups = collect_to_hash(aws.log_groups, :log_group_name)
+
+    p dsl_log_groups
+    p aws_log_groups
   end
 
   def load_file(file)

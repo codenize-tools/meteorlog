@@ -1,7 +1,7 @@
 class Meteorlog::Wrapper
   class << self
-    def wrap(cw, opts = {})
-      #Meteorlog::Wrapper::CloudWatchLogs.new(cw, opts)
+    def wrap(cwl, opts = {})
+      Meteorlog::Wrapper::CloudWatchLogs.new(cwl, opts)
     end
   end # of class methods
 end
