@@ -26,10 +26,10 @@ Or install it yourself as:
 export AWS_ACCESS_KEY_ID='...'
 export AWS_SECRET_ACCESS_KEY='...'
 export AWS_REGION='us-east-1'
-meteorlog -e -o Alarmfile  # export CloudWatch Alarm
-vi Alarmfile
+meteorlog -e -o Logsfile  # export CloudWatch Logs
+vi Logsfile
 meteorlog -a --dry-run
-meteorlog -a               # apply `Alarmfile` to CloudWatch
+meteorlog -a               # apply `Logsfile` to CloudWatch Logs
 ```
 
 ## Help
