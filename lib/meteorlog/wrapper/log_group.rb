@@ -14,4 +14,9 @@ class Meteorlog::Wrapper::LogGroup
     @cloud_watch_logs.describe_log_streams(
       :log_group_name => log_group_name).log_streams
   end
+
+  def metric_filters
+    @cloud_watch_logs.describe_metric_filters(
+      :log_group_name => log_group_name).metric_filters
+  end
 end
