@@ -59,7 +59,7 @@ class Meteorlog::Exporter
       }
 
       if metric_filter.filter_pattern
-        result[:filter_pattern] = metric_filter.filter_pattern
+        result[filter_name][:filter_pattern] = metric_filter.filter_pattern
       end
     end
 
