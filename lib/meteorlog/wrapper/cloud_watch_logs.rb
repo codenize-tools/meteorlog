@@ -6,7 +6,7 @@ class Meteorlog::Wrapper::CloudWatchLogs
 
   def log_groups
     Meteorlog::Wrapper::LogGroupCollection.new(
-      @cloud_watch_logs, @cloud_watch_logs.describe_log_groups.log_groups, @options)
+      @cloud_watch_logs, @cloud_watch_logs.describe_log_groups.each.inject([]) {|r, i| r + i.log_groups }, @options)
   end
 
   def modified?

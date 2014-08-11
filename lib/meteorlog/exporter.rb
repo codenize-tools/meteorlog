@@ -13,7 +13,7 @@ class Meteorlog::Exporter
   def export
     result = {}
 
-    log_groups = @cloud_watch_logs.describe_log_groups.log_groups
+    log_groups = @cloud_watch_logs.describe_log_groups.each.inject([]) {|r, i| r + i.log_groups }
 
     log_groups.each do |log_group|
       export_log_graoup(log_group, result)
