@@ -57,6 +57,9 @@ require 'other/logsfile'
 log_group "/var/log/messages" do
   log_stream "my-stream"
 
+  # Please write the following if you do not want to manage log_streams
+  #any_log_streams
+
   metric_filter "MyAppAccessCount" do
     metric :name=>"EventCount", :namespace=>"YourNamespace", :value=>"1"
   end
