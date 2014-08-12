@@ -64,7 +64,7 @@ class Meteorlog::Wrapper::MetricFilter
 
   def format_delta(delta)
     delta.map {|name, values|
-      "#{name}(#{values[:old].inspect}=>#{values[:new].inspect})"
+      "#{name}(#{values[:old].inspect} --> #{values[:new].inspect})"
     }.join(', ')
   end
 
