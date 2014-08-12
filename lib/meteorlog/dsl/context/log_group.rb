@@ -13,6 +13,11 @@ class Meteorlog::DSL::Context::LogGroup
     instance_eval(&block)
   end
 
+  def any_log_streams
+    _call_once(:any_log_streams)
+    @result.any_log_streams = true
+  end
+
   def log_stream(name)
     _required(:log_stream_name, name)
     _validate("LogStream `#{name}` is already defined") do

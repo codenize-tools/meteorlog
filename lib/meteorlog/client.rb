@@ -46,7 +46,10 @@ class Meteorlog::Client
   end
 
   def walk_log_group(dsl_log_group, aws_log_group)
-    walk_log_streams(dsl_log_group.log_streams, aws_log_group.log_streams)
+    unless dsl_log_group.any_log_streams
+      walk_log_streams(dsl_log_group.log_streams, aws_log_group.log_streams)
+    end
+
     walk_metric_filters(dsl_log_group.metric_filters, aws_log_group.metric_filters)
   end
 
