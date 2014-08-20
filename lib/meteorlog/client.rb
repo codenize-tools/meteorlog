@@ -38,8 +38,10 @@ class Meteorlog::Client
       walk_log_group(dsl_log_group, aws_log_group)
     end
 
-    aws_log_groups.each do |log_group_name, aws_log_group|
-      aws_log_group.delete
+    unless @options[:skip_delete_group]
+      aws_log_groups.each do |log_group_name, aws_log_group|
+        aws_log_group.delete
+      end
     end
 
     aws.modified?

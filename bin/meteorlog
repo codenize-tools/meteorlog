@@ -24,17 +24,18 @@ ARGV.options do |opt|
     region = nil
     profile_name = nil
 
-    opt.on('-p', '--profile PROFILE_NAME')  {|v| profile_name      = v       }
-    opt.on('-k', '--access-key ACCESS_KEY') {|v| access_key        = v       }
-    opt.on('-s', '--secret-key SECRET_KEY') {|v| secret_key        = v       }
-    opt.on('-r', '--region REGION')         {|v| region            = v       }
-    opt.on('-a', '--apply')                 {    mode              = :apply  }
-    opt.on('-f', '--file FILE')             {|v| file              = v       }
-    opt.on('',   '--dry-run')               {    options[:dry_run] = true    }
-    opt.on('-e', '--export')                {    mode              = :export }
-    opt.on('-o', '--output FILE')           {|v| output_file       = v       }
-    opt.on(''  , '--no-color')              {    options[:color]   = false   }
-    opt.on(''  , '--debug')                 {    options[:debug]   = true    }
+    opt.on('-p', '--profile PROFILE_NAME')  {|v| profile_name      = v              }
+    opt.on('-k', '--access-key ACCESS_KEY') {|v| access_key        = v              }
+    opt.on('-s', '--secret-key SECRET_KEY') {|v| secret_key        = v              }
+    opt.on('-r', '--region REGION')         {|v| region            = v              }
+    opt.on('-a', '--apply')                 {    mode              = :apply         }
+    opt.on('-f', '--file FILE')             {|v| file              = v              }
+    opt.on('',   '--dry-run')               {    options[:dry_run] = true           }
+    opt.on('',   '--skip-delete-group')     {    options[:skip_delete_group] = true }
+    opt.on('-e', '--export')                {    mode              = :export        }
+    opt.on('-o', '--output FILE')           {|v| output_file       = v              }
+    opt.on(''  , '--no-color')              {    options[:color]   = false          }
+    opt.on(''  , '--debug')                 {    options[:debug]   = true           }
     opt.parse!
 
     aws_opts = {}
