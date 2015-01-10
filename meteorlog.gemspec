@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ['sgwr_dts@yahoo.co.jp']
   spec.description   = "Meteorlog is a tool to manage CloudWatch Logs. It defines the state of CloudWatch Logs using DSL, and updates CloudWatch Logs according to DSL."
   spec.summary       = "Meteorlog is a tool to manage CloudWatch Logs."
-  spec.homepage      = 'https://github.com/winebarrel/meteorlog'
+  spec.homepage      = 'http://meteorlog.codenize.tools/'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files -z`.split("\x0")
