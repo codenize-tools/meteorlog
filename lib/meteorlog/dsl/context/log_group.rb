@@ -1,5 +1,6 @@
 class Meteorlog::DSL::Context::LogGroup
   include Meteorlog::DSL::Validator
+  include Meteorlog::TemplateHelper
 
   attr_reader :result
 

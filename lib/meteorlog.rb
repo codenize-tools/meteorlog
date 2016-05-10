@@ -10,6 +10,7 @@ require 'aws-sdk-core'
 require 'term/ansicolor'
 
 require 'meteorlog/logger'
+require 'meteorlog/template_helper'
 require 'meteorlog/utils'
 require 'meteorlog/client'
 require 'meteorlog/dsl'

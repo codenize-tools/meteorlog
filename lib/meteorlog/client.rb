@@ -25,6 +25,7 @@ class Meteorlog::Client
     aws_log_groups = collect_to_hash(aws.log_groups, :log_group_name)
 
     dsl_log_groups.each do |log_group_name, dsl_log_group|
+      next unless Meteorlog::Utils.matched?(log_group_name, @options[:include], @options[:exclude])
       aws_log_group = aws_log_groups[log_group_name]
 
       unless aws_log_group
@@ -34,12 +35,14 @@ class Meteorlog::Client
     end
 
     dsl_log_groups.each do |log_group_name, dsl_log_group|
+      next unless Meteorlog::Utils.matched?(log_group_name, @options[:include], @options[:exclude])
       aws_log_group = aws_log_groups.delete(log_group_name)
       walk_log_group(dsl_log_group, aws_log_group)
     end
 
     unless @options[:skip_delete_group]
       aws_log_groups.each do |log_group_name, aws_log_group|
+        next unless Meteorlog::Utils.matched?(log_group_name, @options[:include], @options[:exclude])
         aws_log_group.delete
       end
     end

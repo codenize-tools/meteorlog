@@ -1,5 +1,6 @@
 class Meteorlog::DSL::Context
   include Meteorlog::DSL::Validator
+  include Meteorlog::TemplateHelper
 
   class << self
     def eval(dsl, path, opts = {})
@@ -21,8 +22,12 @@ class Meteorlog::DSL::Context
 
   private
 
+  def template(name, &block)
+    @context.templates[name.to_s] = block
+  end
+
   def require(file)
-    logsfile = File.expand_path(File.join(File.dirname(@path), file))
+    logsfile = (file =~ %r|\A/|) ? file : File.expand_path(File.join(File.dirname(@path), file))
 
     if File.exist?(logsfile)
       instance_eval(File.read(logsfile), logsfile)

@@ -26,6 +26,9 @@ class Meteorlog::Exporter
 
   def export_log_graoup(log_group, result)
     log_group_name = log_group.log_group_name
+
+    return unless Meteorlog::Utils.matched?(log_group_name, @options[:include], @options[:exclude])
+
     log_streams = @cloud_watch_logs.describe_log_streams(
       :log_group_name => log_group_name).log_streams
     metric_filters = @cloud_watch_logs.describe_metric_filters(

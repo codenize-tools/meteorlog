@@ -1,5 +1,6 @@
 class Meteorlog::DSL::Context::MetricFilter
   include Meteorlog::DSL::Validator
+  include Meteorlog::TemplateHelper
 
   attr_reader :result
 

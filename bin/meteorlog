@@ -34,6 +34,8 @@ ARGV.options do |opt|
     opt.on('',   '--skip-delete-group')     {    options[:skip_delete_group] = true }
     opt.on('-e', '--export')                {    mode              = :export        }
     opt.on('-o', '--output FILE')           {|v| output_file       = v              }
+    opt.on('',   '--include REGEXP')        {|v| options[:include] = Regexp.new(v)  }
+    opt.on('',   '--exclude REGEXP')        {|v| options[:exclude] = Regexp.new(v)  }
     opt.on(''  , '--no-color')              {    options[:color]   = false          }
     opt.on(''  , '--debug')                 {    options[:debug]   = true           }
     opt.parse!
