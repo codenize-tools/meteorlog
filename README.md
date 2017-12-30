@@ -87,4 +87,4 @@ end
 ```
 
 ## Similar tools
-* [Codenize.tools](http://http://codenize.tools/)
+* [Codenize.tools](https://codenize.tools/)
